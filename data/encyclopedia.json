@@ -1,272 +1,438 @@
-{
-  "meta": {
-    "title": "World of Tetris: Fragments of the Sleepless Realm",
-    "type": "Gameplay & Systems Encyclopedia",
-    "version": "1.2",
-    "language": "en"
-  },
+// js/encyclopedia.js - ПОЛНАЯ РЕАЛИЗАЦИЯ ЭНЦИКЛОПЕДИИ/ТУТОРИАЛА
+import { t } from './i18n.js';
+import { localizeEncyclopedia } from './ui-localization.js';
 
-  "chapters": [
-    {
-      "id": "basics",
-      "icon": "🧱",
-      "title": "Basics",
-      "sections": [
-        {
-          "title": "What Is This Game?",
-          "icon": "🎮",
-          "text": "World of Tetris is a puzzle game where pressure, not speed alone, defines difficulty. You are not fighting blocks — you are fighting rising tension."
-        },
-        {
-          "title": "Goal",
-          "icon": "🏁",
-          "text": "The goal is to progress through 100 levels and break the curse placed upon the Sleepless Realm."
-        },
-        {
-          "title": "Game Over",
-          "icon": "☠️",
-          "text": "The game ends when new pieces can no longer enter the field. Failure is expected and part of learning."
-        }
-      ]
+// Состояние энциклопедии
+const EncyclopediaState = {
+    currentTab: 'basics',
+    currentPage: 1,
+    totalPages: 5,
+    isOpen: false
+};
+
+// Данные для энциклопедии (заглушки, которые можно заменить на реальный контент)
+const ENCYCLOPEDIA_DATA = {
+    basics: {
+        title: 'tutorial_basics_title',
+        pages: [
+            { content: 'tutorial_basics_placeholder' },
+            { content: 'tutorial_page2_content' },
+            { content: 'tutorial_page3_content' }
+        ]
     },
-
-    {
-      "id": "controls",
-      "icon": "🎮",
-      "title": "Controls",
-      "sections": [
-        {
-          "title": "Movement",
-          "icon": "⬅️➡️",
-          "text": "Move pieces left and right using Arrow keys or A / D.",
-          "diagram": "move_left_right",
-          "interactive": true
-        },
-        {
-          "title": "Rotation",
-          "icon": "🔄",
-          "text": "Rotate pieces using Arrow Up or W.",
-          "diagram": "rotate_piece",
-          "interactive": true
-        },
-        {
-          "title": "Soft Drop",
-          "icon": "⬇️",
-          "text": "Soft Drop accelerates falling without locking the piece in place.",
-          "diagram": "soft_drop",
-          "interactive": true
-        },
-        {
-          "title": "Hard Drop",
-          "icon": "⚡",
-          "text": "Hard Drop instantly places the piece, rewarding confidence and precision.",
-          "diagram": "hard_drop",
-          "interactive": true
-        },
-        {
-          "title": "Hold",
-          "icon": "🧊",
-          "text": "Hold saves the current piece for later use. Activate with Shift or Ctrl.",
-          "diagram": "hold_piece",
-          "interactive": true
-        },
-        {
-          "title": "Pause",
-          "icon": "⏸",
-          "text": "Pause the game using P or Escape. Use this time to breathe and think."
-        }
-      ]
+    heroes: {
+        title: 'tutorial_heroes_title',
+        pages: [
+            { content: 'tutorial_heroes_placeholder' },
+            { content: 'mage_description' },
+            { content: 'warrior_description' },
+            { content: 'healer_description' },
+            { content: 'berserker_description' }
+        ]
     },
-
-    {
-      "id": "scoring",
-      "icon": "🧮",
-      "title": "Scoring",
-      "sections": [
-        {
-          "title": "Line Clears",
-          "icon": "🧱",
-          "text": "Clearing lines is the primary way to score points. Multiple lines grant higher rewards."
-        },
-        {
-          "title": "Combos",
-          "icon": "🔥",
-          "text": "Consecutive line clears form combos. Combos reduce pressure and significantly increase score."
-        },
-        {
-          "title": "Soft vs Hard Drop",
-          "icon": "⚖️",
-          "text": "Soft Drop offers control and safety. Hard Drop rewards decisiveness but carries higher risk."
-        }
-      ]
+    pets: {
+        title: 'tutorial_pets_title',
+        pages: [
+            { content: 'tutorial_pets_placeholder' },
+            { content: 'cat_description' },
+            { content: 'dog_description' },
+            { content: 'fox_description' },
+            { content: 'bear_description' }
+        ]
     },
-
-    {
-      "id": "pressure",
-      "icon": "😰",
-      "title": "Pressure",
-      "sections": [
-        {
-          "title": "What Is Pressure?",
-          "icon": "📈",
-          "text": "Pressure is a hidden variable representing tension. It rises with mistakes and falls with skilled play."
-        },
-        {
-          "title": "Increasing Pressure",
-          "icon": "⬆️",
-          "text": "Pressure increases from holes, high stacks, slow decisions, and repeated errors."
-        },
-        {
-          "title": "Reducing Pressure",
-          "icon": "⬇️",
-          "text": "Clearing lines, performing combos, and decisive actions reduce pressure."
-        }
-      ]
+    abilities: {
+        title: 'tutorial_abilities_title',
+        pages: [
+            { content: 'tutorial_abilities_placeholder' },
+            { content: 'ability1_description' },
+            { content: 'ability2_description' },
+            { content: 'ability3_description' }
+        ]
     },
-
-    {
-      "id": "difficulty",
-      "icon": "⚙️",
-      "title": "Difficulty & Progression",
-      "sections": [
-        {
-          "title": "Levels and Tiers",
-          "icon": "📊",
-          "text": "Levels represent story progress. Difficulty Tiers represent mechanical challenge."
-        },
-        {
-          "title": "Difficulty Multipliers",
-          "icon": "✖️",
-          "text": "Easy ×0.5, Normal ×1.0, Hard ×1.5, Hardcore ×2.0. Normal is the intended experience."
-        },
-        {
-          "title": "What Difficulty Changes",
-          "icon": "🧠",
-          "text": "Difficulty multiplies pressure gain, pressure reduction, fall speed, reaction windows, and antagonist activity."
-        }
-      ]
-    },
-
-    {
-      "id": "heroes",
-      "icon": "🧙",
-      "title": "Heroes",
-      "sections": [
-        {
-          "title": "Hero Philosophy",
-          "icon": "📜",
-          "text": "Heroes represent different approaches to managing pressure and correcting mistakes."
-        },
-        {
-          "title": "Warrior",
-          "icon": "🗡",
-          "text": "Stable and reliable. Focuses on consistency and error reduction."
-        },
-        {
-          "title": "Mage",
-          "icon": "🧙‍♂️",
-          "text": "Controls the field by removing or reshaping blocks."
-        },
-        {
-          "title": "Healer",
-          "icon": "💖",
-          "text": "Repairs mistakes by filling gaps and smoothing dangerous structures."
-        },
-        {
-          "title": "Berserker",
-          "icon": "🐉",
-          "text": "Thrives under pressure. Gains power as tension rises."
-        },
-        {
-          "title": "Rogue — The Laughing Archer",
-          "icon": "🏹",
-          "text": "A trickster who thrives in chaos. Uses humor, precision shots, and provocation to disrupt both the field and the Black Baron."
-        },
-        {
-          "title": "Rogue Abilities",
-          "icon": "😏",
-          "text": "Rogue can shoot blocks, pierce lines, interrupt enemy spells, and taunt the Black Baron into making mistakes."
-        }
-      ]
-    },
-
-    {
-      "id": "pets",
-      "icon": "🐾",
-      "title": "Pets",
-      "sections": [
-        {
-          "title": "Pet System",
-          "icon": "🐾",
-          "text": "Pets are passive companions inspired by JRPG systems. They assist automatically and never replace player skill."
-        },
-        {
-          "title": "Cat",
-          "icon": "🐱",
-          "text": "Focus: Intelligence. Anticipates risky placements and reduces pressure from potential mistakes."
-        },
-        {
-          "title": "Dog",
-          "icon": "🐶",
-          "text": "Focus: Defense. Stabilizes pressure spikes and reduces punishment from errors."
-        },
-        {
-          "title": "Fox",
-          "icon": "🦊",
-          "text": "Focus: Speed. Reduces cooldowns and improves reaction windows at high difficulty."
-        },
-        {
-          "title": "Bear",
-          "icon": "🐻",
-          "text": "Focus: Strength. Amplifies positive actions such as combos and line clears."
-        }
-      ]
-    },
-
-    {
-      "id": "antagonist",
-      "icon": "😈",
-      "title": "The Black Baron",
-      "sections": [
-        {
-          "title": "Who Is the Black Baron?",
-          "icon": "👁",
-          "text": "The Black Baron is a reactive antagonist who reflects player performance rather than creating difficulty."
-        },
-        {
-          "title": "Anger System",
-          "icon": "😡",
-          "text": "The Baron possesses an Anger meter. As Anger rises, he loses composure and begins to make mistakes."
-        },
-        {
-          "title": "Loss of Control",
-          "icon": "💥",
-          "text": "At high Anger levels, the Baron's interventions may misfire, occasionally helping the player instead of hindering them."
-        }
-      ]
-    },
-
-    {
-      "id": "taunt",
-      "icon": "😏",
-      "title": "Taunt & Provocation",
-      "sections": [
-        {
-          "title": "What Is Taunt?",
-          "icon": "💬",
-          "text": "Taunt is a psychological mechanic inspired by RPGs. It provokes the Black Baron, increasing his Anger."
-        },
-        {
-          "title": "Mocking Shot",
-          "icon": "🏹",
-          "text": "Rogue's taunt ability fires a mocking shot that disrupts the Baron's concentration."
-        },
-        {
-          "title": "Risk and Reward",
-          "icon": "⚖️",
-          "text": "Taunting is risky. It creates windows of opportunity but can backfire if misused."
-        }
-      ]
+    controls: {
+        title: 'tutorial_controls_title',
+        pages: [
+            { 
+                content: 'controls_intro',
+                controls: [
+                    { key: '← →', action: 'control_move' },
+                    { key: '↑', action: 'control_rotate' },
+                    { key: '↓', action: 'control_soft_drop' },
+                    { key: 'Space', action: 'control_hard_drop' },
+                    { key: 'Shift', action: 'control_hold' },
+                    { key: 'P', action: 'Pause game' },
+                    { key: 'ESC', action: 'Return to menu' }
+                ]
+            }
+        ]
     }
-  ]
+};
+
+/**
+ * Инициализация энциклопедии
+ */
+export function initEncyclopedia() {
+    console.log('Encyclopedia module initialized');
+    
+    // Обработчик открытия энциклопедии
+    document.addEventListener('open-encyclopedia', openEncyclopedia);
+    
+    // Обработчик закрытия
+    const closeBtn = document.querySelector('[data-action="close-encyclopedia"]');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeEncyclopedia);
+    }
+    
+    // Обработчики табов
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.dataset.tab;
+            switchTab(tabId);
+        });
+    });
+    
+    // Обработчики навигации
+    const prevBtn = document.querySelector('[data-i18n="tutorial_prev"]');
+    const nextBtn = document.querySelector('[data-i18n="tutorial_next"]');
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => changePage(-1));
+        prevBtn.addEventListener('mouseenter', () => {
+            if (prevBtn.disabled) {
+                prevBtn.title = t('first_page') || 'This is the first page';
+            }
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => changePage(1));
+        nextBtn.addEventListener('mouseenter', () => {
+            if (nextBtn.disabled) {
+                nextBtn.title = t('last_page') || 'This is the last page';
+            }
+        });
+    }
+    
+    // Закрытие по клавише ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && EncyclopediaState.isOpen) {
+            closeEncyclopedia();
+        }
+    });
+    
+    // Локализация при смене языка
+    document.addEventListener('languageChanged', () => {
+        if (EncyclopediaState.isOpen) {
+            updateEncyclopediaContent();
+        }
+    });
 }
+
+/**
+ * Открытие энциклопедии
+ */
+function openEncyclopedia() {
+    const encyclopedia = document.getElementById('encyclopedia');
+    const gameArea = document.getElementById('gameArea');
+    const startScreen = document.getElementById('startScreen');
+    
+    if (!encyclopedia) {
+        console.error('Encyclopedia element not found!');
+        return;
+    }
+    
+    // Скрыть другие элементы интерфейса
+    if (gameArea) gameArea.classList.add('hidden');
+    if (startScreen) startScreen.classList.add('hidden');
+    
+    // Показать энциклопедию
+    encyclopedia.classList.remove('hidden');
+    
+    // Сбросить состояние
+    EncyclopediaState.isOpen = true;
+    EncyclopediaState.currentPage = 1;
+    EncyclopediaState.currentTab = 'basics';
+    
+    // Активировать первый таб
+    switchTab('basics');
+    
+    // Локализовать контент
+    localizeEncyclopedia();
+    updateEncyclopediaContent();
+    
+    // Обновить кнопки навигации
+    updateNavigationButtons();
+    
+    console.log('Encyclopedia opened');
+    
+    // Диспетчер событий для аналитики
+    document.dispatchEvent(new CustomEvent('encyclopedia:opened', {
+        detail: { tab: EncyclopediaState.currentTab }
+    }));
+}
+
+/**
+ * Закрытие энциклопедии
+ */
+function closeEncyclopedia() {
+    const encyclopedia = document.getElementById('encyclopedia');
+    const startScreen = document.getElementById('startScreen');
+    
+    if (!encyclopedia) return;
+    
+    // Скрыть энциклопедию
+    encyclopedia.classList.add('hidden');
+    
+    // Показать стартовый экран
+    if (startScreen) startScreen.classList.remove('hidden');
+    
+    // Обновить состояние
+    EncyclopediaState.isOpen = false;
+    
+    console.log('Encyclopedia closed');
+    
+    // Диспетчер событий
+    document.dispatchEvent(new CustomEvent('encyclopedia:closed'));
+}
+
+/**
+ * Переключение табов
+ */
+function switchTab(tabId) {
+    if (!ENCYCLOPEDIA_DATA[tabId]) {
+        console.warn(`Tab ${tabId} not found in encyclopedia data`);
+        return;
+    }
+    
+    // Обновить активные табы
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.tab === tabId) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // Показать соответствующий контент
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+        if (content.dataset.tabContent === tabId) {
+            content.classList.add('active');
+        }
+    });
+    
+    // Обновить состояние
+    EncyclopediaState.currentTab = tabId;
+    EncyclopediaState.currentPage = 1;
+    
+    // Обновить контент
+    updateEncyclopediaContent();
+    updateNavigationButtons();
+    
+    // Диспетчер событий
+    document.dispatchEvent(new CustomEvent('encyclopedia:tabChanged', {
+        detail: { 
+            tab: tabId,
+            title: ENCYCLOPEDIA_DATA[tabId].title
+        }
+    }));
+}
+
+/**
+ * Смена страницы
+ */
+function changePage(delta) {
+    const tabData = ENCYCLOPEDIA_DATA[EncyclopediaState.currentTab];
+    if (!tabData) return;
+    
+    const newPage = EncyclopediaState.currentPage + delta;
+    const totalPages = tabData.pages.length;
+    
+    // Проверка границ
+    if (newPage < 1 || newPage > totalPages) {
+        return;
+    }
+    
+    // Обновить состояние
+    EncyclopediaState.currentPage = newPage;
+    
+    // Обновить контент
+    updateEncyclopediaContent();
+    updateNavigationButtons();
+    
+    // Диспетчер событий
+    document.dispatchEvent(new CustomEvent('encyclopedia:pageChanged', {
+        detail: { 
+            page: newPage,
+            total: totalPages,
+            tab: EncyclopediaState.currentTab
+        }
+    }));
+}
+
+/**
+ * Обновление контента энциклопедии
+ */
+function updateEncyclopediaContent() {
+    const tabData = ENCYCLOPEDIA_DATA[EncyclopediaState.currentTab];
+    if (!tabData) return;
+    
+    const currentPageData = tabData.pages[EncyclopediaState.currentPage - 1];
+    if (!currentPageData) return;
+    
+    const contentElement = document.querySelector(`.tab-content[data-tab-content="${EncyclopediaState.currentTab}"]`);
+    if (!contentElement) return;
+    
+    // Очистить предыдущий контент (кроме структуры)
+    const existingContent = contentElement.querySelector('.dynamic-content');
+    if (existingContent) {
+        existingContent.remove();
+    }
+    
+    // Создать новый контент
+    const dynamicContent = document.createElement('div');
+    dynamicContent.className = 'dynamic-content';
+    
+    // Обработка разных типов контента
+    if (currentPageData.controls) {
+        // Отображение управления
+        const controlsList = document.createElement('div');
+        controlsList.className = 'controls-list';
+        
+        currentPageData.controls.forEach(control => {
+            const controlItem = document.createElement('div');
+            controlItem.className = 'control-item';
+            
+            const keyElem = document.createElement('kbd');
+            keyElem.textContent = control.key;
+            
+            const actionElem = document.createElement('span');
+            actionElem.textContent = t(control.action) || control.action;
+            
+            controlItem.appendChild(keyElem);
+            controlItem.appendChild(actionElem);
+            controlsList.appendChild(controlItem);
+        });
+        
+        dynamicContent.appendChild(controlsList);
+    } else {
+        // Отображение обычного текста
+        const contentParagraph = document.createElement('p');
+        const translation = t(currentPageData.content);
+        contentParagraph.textContent = translation || currentPageData.content;
+        dynamicContent.appendChild(contentParagraph);
+    }
+    
+    // Добавить заголовок если есть
+    if (tabData.title) {
+        const title = contentElement.querySelector('h3');
+        if (title) {
+            title.textContent = t(tabData.title) || tabData.title;
+        }
+    }
+    
+    contentElement.appendChild(dynamicContent);
+    
+    // Обновить индикатор страниц
+    updatePageIndicator();
+}
+
+/**
+ * Обновление индикатора страниц
+ */
+function updatePageIndicator() {
+    const tabData = ENCYCLOPEDIA_DATA[EncyclopediaState.currentTab];
+    if (!tabData) return;
+    
+    const pageCurrent = document.querySelector('.page-current');
+    const pageTotal = document.querySelector('.page-total');
+    
+    if (pageCurrent) {
+        pageCurrent.textContent = EncyclopediaState.currentPage;
+    }
+    
+    if (pageTotal) {
+        pageTotal.textContent = tabData.pages.length;
+    }
+}
+
+/**
+ * Обновление кнопок навигации
+ */
+function updateNavigationButtons() {
+    const tabData = ENCYCLOPEDIA_DATA[EncyclopediaState.currentTab];
+    if (!tabData) return;
+    
+    const prevBtn = document.querySelector('[data-i18n="tutorial_prev"]');
+    const nextBtn = document.querySelector('[data-i18n="tutorial_next"]');
+    
+    const totalPages = tabData.pages.length;
+    
+    // Кнопка "Назад"
+    if (prevBtn) {
+        prevBtn.disabled = EncyclopediaState.currentPage <= 1;
+        if (prevBtn.disabled) {
+            prevBtn.classList.add('disabled');
+        } else {
+            prevBtn.classList.remove('disabled');
+        }
+    }
+    
+    // Кнопка "Вперед"
+    if (nextBtn) {
+        nextBtn.disabled = EncyclopediaState.currentPage >= totalPages;
+        if (nextBtn.disabled) {
+            nextBtn.classList.add('disabled');
+        } else {
+            nextBtn.classList.remove('disabled');
+        }
+    }
+}
+
+/**
+ * Добавление контента в энциклопедию
+ */
+export function addEncyclopediaContent(tabId, pageData) {
+    if (!ENCYCLOPEDIA_DATA[tabId]) {
+        ENCYCLOPEDIA_DATA[tabId] = {
+            title: tabId,
+            pages: []
+        };
+    }
+    
+    ENCYCLOPEDIA_DATA[tabId].pages.push(pageData);
+    
+    // Если энциклопедия открыта, обновить контент
+    if (EncyclopediaState.isOpen && EncyclopediaState.currentTab === tabId) {
+        updateEncyclopediaContent();
+        updateNavigationButtons();
+    }
+}
+
+/**
+ * Получение текущего состояния энциклопедии
+ */
+export function getEncyclopediaState() {
+    return { ...EncyclopediaState };
+}
+
+/**
+ * Проверка, открыта ли энциклопедия
+ */
+export function isEncyclopediaOpen() {
+    return EncyclopediaState.isOpen;
+}
+
+// Автоматическая инициализация при загрузке модуля
+document.addEventListener('DOMContentLoaded', initEncyclopedia);
+
+// Экспорт для использования в других модулях
+export default {
+    initEncyclopedia,
+    openEncyclopedia,
+    closeEncyclopedia,
+    switchTab,
+    addEncyclopediaContent,
+    getEncyclopediaState,
+    isEncyclopediaOpen,
+    ENCYCLOPEDIA_DATA
+};

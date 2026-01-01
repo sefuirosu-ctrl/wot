@@ -1,0 +1,581 @@
+/* css/menu.css - ПОЛНЫЕ СТИЛИ МЕНЮ И ИГРОВОГО ИНТЕРФЕЙСА */
+
+/* ======================
+   START SCREEN / MAIN MENU
+======================= */
+.start-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0c0c1d 0%, #1a1a2e 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.start-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('../data/images/menu-bg.jpg') no-repeat center center;
+    background-size: cover;
+    opacity: 0.2;
+    z-index: -1;
+}
+
+/* ======================
+   MENU PANELS
+======================= */
+.menu-panel {
+    background: rgba(26, 26, 46, 0.9);
+    border: 2px solid #00f0f0;
+    border-radius: 15px;
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 240, 240, 0.3);
+    animation: panelAppear 0.5s ease-out;
+}
+
+@keyframes panelAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menu-panel h2 {
+    color: #00f0f0;
+    font-size: 2.5rem;
+    margin: 0 0 10px 0;
+    text-shadow: 0 0 10px rgba(0, 240, 240, 0.5);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    color: #aaa;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+/* ======================
+   MENU STATE MANAGEMENT - КРИТИЧЕСКИ ВАЖНО!
+======================= */
+.menu-title [data-menu="title"],
+.menu-hero [data-menu="hero"],
+.menu-pet [data-menu="pet"] {
+    display: block;
+}
+
+.menu-title [data-menu]:not([data-menu="title"]),
+.menu-hero [data-menu]:not([data-menu="hero"]),
+.menu-pet [data-menu]:not([data-menu="pet"]) {
+    display: none;
+}
+
+.menu-hidden {
+    display: none !important;
+}
+
+/* ======================
+   BUTTONS
+======================= */
+.btn-primary {
+    background: linear-gradient(135deg, #00f0f0 0%, #0099cc 100%);
+    border: none;
+    border-radius: 8px;
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 15px 40px;
+    margin: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+    max-width: 300px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 240, 240, 0.4);
+    background: linear-gradient(135deg, #00ffff 0%, #00aadd 100%);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: rgba(0, 240, 240, 0.1);
+    border: 1px solid rgba(0, 240, 240, 0.3);
+    border-radius: 8px;
+    color: #00f0f0;
+    font-size: 1rem;
+    padding: 12px 25px;
+    margin: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    min-width: 120px;
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 240, 240, 0.2);
+    border-color: #00f0f0;
+    transform: translateY(-1px);
+}
+
+.btn-secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-secondary:disabled:hover {
+    background: rgba(0, 240, 240, 0.1);
+    border-color: rgba(0, 240, 240, 0.3);
+    transform: none;
+}
+
+.btn-icon {
+    background: rgba(0, 240, 240, 0.1);
+    border: 1px solid rgba(0, 240, 240, 0.3);
+    border-radius: 50%;
+    color: #00f0f0;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon:hover {
+    background: rgba(0, 240, 240, 0.2);
+    border-color: #00f0f0;
+    transform: scale(1.1);
+}
+
+/* ======================
+   MENU ROWS & GRIDS
+======================= */
+.menu-row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.select-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+    .select-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.select-grid button {
+    background: rgba(0, 240, 240, 0.1);
+    border: 1px solid rgba(0, 240, 240, 0.3);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 15px 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+}
+
+.select-grid button:hover {
+    background: rgba(0, 240, 240, 0.2);
+    border-color: #00f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 240, 240, 0.2);
+}
+
+.select-grid button:active {
+    transform: translateY(0);
+}
+
+/* ======================
+   GAME CONTAINER & PANELS
+======================= */
+.game-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.game-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.panel {
+    background: rgba(26, 26, 46, 0.9);
+    border: 2px solid #00f0f0;
+    border-radius: 10px;
+    padding: 15px;
+    min-width: 150px;
+    text-align: center;
+}
+
+.panel h3 {
+    color: #00f0f0;
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ======================
+   STATISTICS PANEL
+======================= */
+.stats {
+    min-width: 200px;
+}
+
+.stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.stat label {
+    color: #aaa;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat span {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+}
+
+/* ======================
+   CANVAS STYLING
+======================= */
+canvas {
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #00f0f0;
+    border-radius: 5px;
+    display: block;
+}
+
+#game {
+    background: rgba(10, 10, 20, 0.9);
+}
+
+#hold, #next {
+    background: rgba(10, 10, 20, 0.7);
+}
+
+/* ======================
+   GAME CONTROLS
+======================= */
+.game-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+/* ======================
+   ANIMATIONS
+======================= */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 240, 240, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 240, 240, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 240, 240, 0);
+    }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* ======================
+   RESPONSIVE DESIGN
+======================= */
+@media (max-width: 768px) {
+    .game-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .panel {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 20px;
+    }
+    
+    .menu-panel {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .menu-panel h2 {
+        font-size: 2rem;
+    }
+    
+    .btn-primary {
+        padding: 12px 30px;
+        font-size: 1.1rem;
+    }
+    
+    .select-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .select-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .menu-row {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-secondary {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+/* ======================
+   HERO & PET SELECTION STYLES
+======================= */
+.select-grid button[data-hero],
+.select-grid button[data-pet] {
+    position: relative;
+    overflow: hidden;
+}
+
+.select-grid button[data-hero]::before,
+.select-grid button[data-pet]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(0, 240, 240, 0.1) 0%,
+        rgba(0, 240, 240, 0.05) 50%,
+        rgba(0, 240, 240, 0.1) 100%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.select-grid button[data-hero]:hover::before,
+.select-grid button[data-pet]:hover::before {
+    opacity: 1;
+}
+
+.select-grid button[data-hero="mage"] {
+    color: #a000f0;
+    border-color: rgba(160, 0, 240, 0.3);
+    background: rgba(160, 0, 240, 0.1);
+}
+
+.select-grid button[data-hero="mage"]:hover {
+    border-color: #a000f0;
+    background: rgba(160, 0, 240, 0.2);
+}
+
+.select-grid button[data-hero="healer"] {
+    color: #00f000;
+    border-color: rgba(0, 240, 0, 0.3);
+    background: rgba(0, 240, 0, 0.1);
+}
+
+.select-grid button[data-hero="healer"]:hover {
+    border-color: #00f000;
+    background: rgba(0, 240, 0, 0.2);
+}
+
+.select-grid button[data-hero="warrior"] {
+    color: #f00000;
+    border-color: rgba(240, 0, 0, 0.3);
+    background: rgba(240, 0, 0, 0.1);
+}
+
+.select-grid button[data-hero="warrior"]:hover {
+    border-color: #f00000;
+    background: rgba(240, 0, 0, 0.2);
+}
+
+.select-grid button[data-hero="berserker"] {
+    color: #f0a000;
+    border-color: rgba(240, 160, 0, 0.3);
+    background: rgba(240, 160, 0, 0.1);
+}
+
+.select-grid button[data-hero="berserker"]:hover {
+    border-color: #f0a000;
+    background: rgba(240, 160, 0, 0.2);
+}
+
+/* Pet colors */
+.select-grid button[data-pet="cat"] {
+    color: #ff9900;
+}
+
+.select-grid button[data-pet="dog"] {
+    color: #996633;
+}
+
+.select-grid button[data-pet="fox"] {
+    color: #ff6600;
+}
+
+.select-grid button[data-pet="bear"] {
+    color: #663300;
+}
+
+/* ======================
+   LOADING STATES
+======================= */
+.loading {
+    opacity: 0.7;
+    cursor: wait !important;
+}
+
+.loading::after {
+    content: '...';
+    animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: ''; }
+    40% { content: '.'; }
+    60% { content: '..'; }
+    80%, 100% { content: '...'; }
+}
+
+/* ======================
+   FOCUS STATES FOR ACCESSIBILITY
+======================= */
+.btn-primary:focus,
+.btn-secondary:focus,
+.btn-icon:focus,
+.select-grid button:focus {
+    outline: 2px solid #00f0f0;
+    outline-offset: 2px;
+}
+
+/* ======================
+   DARK/LIGHT THEME SUPPORT
+======================= */
+[data-theme="light"] .menu-panel {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: #0099cc;
+}
+
+[data-theme="light"] .menu-panel h2 {
+    color: #0099cc;
+}
+
+[data-theme="light"] .subtitle {
+    color: #666;
+}
+
+[data-theme="light"] .panel {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: #0099cc;
+}
+
+[data-theme="light"] .panel h3 {
+    color: #0099cc;
+}
+
+[data-theme="light"] .stat label {
+    color: #666;
+}
+
+[data-theme="light"] .stat span {
+    color: #333;
+}
+
+[data-theme="light"] .select-grid button {
+    background: rgba(0, 153, 204, 0.1);
+    border-color: rgba(0, 153, 204, 0.3);
+    color: #333;
+}
+
+[data-theme="light"] .select-grid button:hover {
+    background: rgba(0, 153, 204, 0.2);
+    border-color: #0099cc;
+}
+
+/* ======================
+   PRINT STYLES
+======================= */
+@media print {
+    .start-screen,
+    .game-container {
+        position: static;
+        background: white;
+        color: black;
+    }
+    
+    .btn-primary,
+    .btn-secondary,
+    .btn-icon,
+    .game-controls,
+    canvas {
+        display: none;
+    }
+}

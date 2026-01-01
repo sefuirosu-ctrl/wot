@@ -1,0 +1,367 @@
+/* css/modals.css - Стили для модальных окон и форм */
+
+/* ======================
+   MODAL WINDOWS
+======================= */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 2px solid #00f0f0;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 240, 240, 0.2);
+}
+
+.modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #00f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: #00f0f0;
+    font-size: 24px;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid rgba(0, 240, 240, 0.3);
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    color: #00f0f0;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 0 10px;
+    line-height: 1;
+}
+
+.btn-close:hover {
+    color: #fff;
+}
+
+/* ======================
+   SETTINGS MODAL
+======================= */
+.setting-section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 240, 240, 0.3);
+}
+
+.setting-section:last-child {
+    border-bottom: none;
+}
+
+.setting-section h3 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.setting-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+}
+
+.language-option {
+    background: rgba(0, 240, 240, 0.1);
+    border: 1px solid rgba(0, 240, 240, 0.3);
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+}
+
+.language-option:hover {
+    background: rgba(0, 240, 240, 0.2);
+    border-color: #00f0f0;
+}
+
+.language-option.active {
+    background: rgba(0, 240, 240, 0.3);
+    border-color: #00f0f0;
+    box-shadow: 0 0 10px rgba(0, 240, 240, 0.5);
+}
+
+.language-option .flag {
+    font-size: 24px;
+}
+
+.language-option .lang-name {
+    flex-grow: 1;
+    color: #fff;
+}
+
+.language-option .check {
+    color: #00f0f0;
+    font-weight: bold;
+}
+
+.setting-option {
+    background: rgba(0, 240, 240, 0.1);
+    border: 1px solid rgba(0, 240, 240, 0.3);
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.setting-option:hover {
+    background: rgba(0, 240, 240, 0.2);
+    border-color: #00f0f0;
+}
+
+.setting-option.active {
+    background: rgba(0, 240, 240, 0.3);
+    border-color: #00f0f0;
+    box-shadow: 0 0 10px rgba(0, 240, 240, 0.5);
+}
+
+.setting-option input[type="radio"] {
+    margin-right: 8px;
+}
+
+.setting-desc {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 4px;
+}
+
+.setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 8px 0;
+}
+
+.setting-row label {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.setting-row input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+.slider {
+    width: 200px;
+    height: 8px;
+    border-radius: 4px;
+    background: #333;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #00f0f0;
+    cursor: pointer;
+}
+
+.volume-percent {
+    min-width: 40px;
+    text-align: right;
+    color: #00f0f0;
+}
+
+.buttons {
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.save-status {
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    min-height: 20px;
+}
+
+.save-status.success {
+    color: #4CAF50;
+}
+
+.save-status.error {
+    color: #f44336;
+}
+
+.save-status.info {
+    color: #00f0f0;
+}
+
+/* ======================
+   AUTHENTICATION FORMS
+======================= */
+.auth-form {
+    background: rgba(26, 26, 46, 0.9);
+    border: 2px solid #00f0f0;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.auth-form h2 {
+    color: #00f0f0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background: #1a1a2e;
+    color: #fff;
+    font-size: 16px;
+}
+
+.form-group input:focus {
+    border-color: #00f0f0;
+    outline: none;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 15px;
+    color: #aaa;
+}
+
+.auth-links a {
+    color: #00f0f0;
+    text-decoration: none;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+.user-info {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #fff;
+    background: rgba(0, 240, 240, 0.1);
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 240, 240, 0.3);
+}
+
+.user-info a {
+    color: #00f0f0;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.user-info a:hover {
+    text-decoration: underline;
+}
+
+.user-welcome {
+    margin-top: 20px;
+    color: #aaa;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* ======================
+   MESSAGES
+======================= */
+.message {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.message.success {
+    background: rgba(76, 175, 80, 0.2);
+    border: 1px solid #4CAF50;
+    color: #4CAF50;
+}
+
+.message.error {
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid #f44336;
+    color: #f44336;
+}
+
+/* ======================
+   UTILITY CLASSES
+======================= */
+.hidden {
+    display: none !important;
+}
+
+/* Menu state classes */
+.menu-title [data-menu="title"],
+.menu-hero [data-menu="hero"],
+.menu-pet [data-menu="pet"] {
+    display: block;
+}
+
+.menu-title [data-menu]:not([data-menu="title"]),
+.menu-hero [data-menu]:not([data-menu="hero"]),
+.menu-pet [data-menu]:not([data-menu="pet"]) {
+    display: none;
+}
