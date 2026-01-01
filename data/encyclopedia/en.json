@@ -1,0 +1,88 @@
+{
+  "title": "Game Encyclopedia",
+  "chapters": [
+    {
+      "icon": "🎮",
+      "title": "Controls",
+      "sections": [
+        {
+          "icon": "⬅️",
+          "title": "Movement",
+          "text": "Use the arrow keys or WASD to move the falling piece left and right.",
+          "diagram": "move_left_right",
+          "interactive": true
+        },
+        {
+          "icon": "⬇️",
+          "title": "Soft Drop",
+          "text": "Press the Down Arrow or S key to make the piece fall faster while you control it.",
+          "diagram": "soft_drop",
+          "interactive": true
+        },
+        {
+          "icon": "⏬",
+          "title": "Hard Drop",
+          "text": "Press Space to instantly drop the piece to the lowest possible position.",
+          "diagram": "hard_drop",
+          "interactive": true
+        },
+        {
+          "icon": "🔄",
+          "title": "Rotation",
+          "text": "Press the Up Arrow or W key to rotate the piece clockwise.",
+          "diagram": "rotate_piece",
+          "interactive": true
+        },
+        {
+          "icon": "📦",
+          "title": "Hold",
+          "text": "Press Shift or Ctrl to store the current piece and swap it with the held one.",
+          "diagram": "hold_piece",
+          "interactive": true
+        }
+      ]
+    },
+    {
+      "icon": "🧠",
+      "title": "Gameplay",
+      "sections": [
+        {
+          "icon": "🧱",
+          "title": "Clearing Lines",
+          "text": "Fill an entire horizontal line with blocks to clear it and earn points."
+        },
+        {
+          "icon": "⚡",
+          "title": "Speed and Levels",
+          "text": "As you clear more lines, the level increases and pieces fall faster."
+        },
+        {
+          "icon": "💀",
+          "title": "Game Over",
+          "text": "The game ends when new pieces can no longer enter the playfield. You can then return to the main menu."
+        }
+      ]
+    },
+    {
+      "icon": "🎯",
+      "title": "Tips",
+      "sections": [
+        {
+          "icon": "🧩",
+          "title": "Plan Ahead",
+          "text": "Watch the next piece preview and plan your moves in advance."
+        },
+        {
+          "icon": "📦",
+          "title": "Use Hold Wisely",
+          "text": "Holding a piece can save you in difficult situations, but you can only use it once per drop."
+        },
+        {
+          "icon": "🧘",
+          "title": "Stay Calm",
+          "text": "As the speed increases, staying calm and focused is the key to success."
+        }
+      ]
+    }
+  ]
+}

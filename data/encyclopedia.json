@@ -1,0 +1,272 @@
+{
+  "meta": {
+    "title": "World of Tetris: Fragments of the Sleepless Realm",
+    "type": "Gameplay & Systems Encyclopedia",
+    "version": "1.2",
+    "language": "en"
+  },
+
+  "chapters": [
+    {
+      "id": "basics",
+      "icon": "🧱",
+      "title": "Basics",
+      "sections": [
+        {
+          "title": "What Is This Game?",
+          "icon": "🎮",
+          "text": "World of Tetris is a puzzle game where pressure, not speed alone, defines difficulty. You are not fighting blocks — you are fighting rising tension."
+        },
+        {
+          "title": "Goal",
+          "icon": "🏁",
+          "text": "The goal is to progress through 100 levels and break the curse placed upon the Sleepless Realm."
+        },
+        {
+          "title": "Game Over",
+          "icon": "☠️",
+          "text": "The game ends when new pieces can no longer enter the field. Failure is expected and part of learning."
+        }
+      ]
+    },
+
+    {
+      "id": "controls",
+      "icon": "🎮",
+      "title": "Controls",
+      "sections": [
+        {
+          "title": "Movement",
+          "icon": "⬅️➡️",
+          "text": "Move pieces left and right using Arrow keys or A / D.",
+          "diagram": "move_left_right",
+          "interactive": true
+        },
+        {
+          "title": "Rotation",
+          "icon": "🔄",
+          "text": "Rotate pieces using Arrow Up or W.",
+          "diagram": "rotate_piece",
+          "interactive": true
+        },
+        {
+          "title": "Soft Drop",
+          "icon": "⬇️",
+          "text": "Soft Drop accelerates falling without locking the piece in place.",
+          "diagram": "soft_drop",
+          "interactive": true
+        },
+        {
+          "title": "Hard Drop",
+          "icon": "⚡",
+          "text": "Hard Drop instantly places the piece, rewarding confidence and precision.",
+          "diagram": "hard_drop",
+          "interactive": true
+        },
+        {
+          "title": "Hold",
+          "icon": "🧊",
+          "text": "Hold saves the current piece for later use. Activate with Shift or Ctrl.",
+          "diagram": "hold_piece",
+          "interactive": true
+        },
+        {
+          "title": "Pause",
+          "icon": "⏸",
+          "text": "Pause the game using P or Escape. Use this time to breathe and think."
+        }
+      ]
+    },
+
+    {
+      "id": "scoring",
+      "icon": "🧮",
+      "title": "Scoring",
+      "sections": [
+        {
+          "title": "Line Clears",
+          "icon": "🧱",
+          "text": "Clearing lines is the primary way to score points. Multiple lines grant higher rewards."
+        },
+        {
+          "title": "Combos",
+          "icon": "🔥",
+          "text": "Consecutive line clears form combos. Combos reduce pressure and significantly increase score."
+        },
+        {
+          "title": "Soft vs Hard Drop",
+          "icon": "⚖️",
+          "text": "Soft Drop offers control and safety. Hard Drop rewards decisiveness but carries higher risk."
+        }
+      ]
+    },
+
+    {
+      "id": "pressure",
+      "icon": "😰",
+      "title": "Pressure",
+      "sections": [
+        {
+          "title": "What Is Pressure?",
+          "icon": "📈",
+          "text": "Pressure is a hidden variable representing tension. It rises with mistakes and falls with skilled play."
+        },
+        {
+          "title": "Increasing Pressure",
+          "icon": "⬆️",
+          "text": "Pressure increases from holes, high stacks, slow decisions, and repeated errors."
+        },
+        {
+          "title": "Reducing Pressure",
+          "icon": "⬇️",
+          "text": "Clearing lines, performing combos, and decisive actions reduce pressure."
+        }
+      ]
+    },
+
+    {
+      "id": "difficulty",
+      "icon": "⚙️",
+      "title": "Difficulty & Progression",
+      "sections": [
+        {
+          "title": "Levels and Tiers",
+          "icon": "📊",
+          "text": "Levels represent story progress. Difficulty Tiers represent mechanical challenge."
+        },
+        {
+          "title": "Difficulty Multipliers",
+          "icon": "✖️",
+          "text": "Easy ×0.5, Normal ×1.0, Hard ×1.5, Hardcore ×2.0. Normal is the intended experience."
+        },
+        {
+          "title": "What Difficulty Changes",
+          "icon": "🧠",
+          "text": "Difficulty multiplies pressure gain, pressure reduction, fall speed, reaction windows, and antagonist activity."
+        }
+      ]
+    },
+
+    {
+      "id": "heroes",
+      "icon": "🧙",
+      "title": "Heroes",
+      "sections": [
+        {
+          "title": "Hero Philosophy",
+          "icon": "📜",
+          "text": "Heroes represent different approaches to managing pressure and correcting mistakes."
+        },
+        {
+          "title": "Warrior",
+          "icon": "🗡",
+          "text": "Stable and reliable. Focuses on consistency and error reduction."
+        },
+        {
+          "title": "Mage",
+          "icon": "🧙‍♂️",
+          "text": "Controls the field by removing or reshaping blocks."
+        },
+        {
+          "title": "Healer",
+          "icon": "💖",
+          "text": "Repairs mistakes by filling gaps and smoothing dangerous structures."
+        },
+        {
+          "title": "Berserker",
+          "icon": "🐉",
+          "text": "Thrives under pressure. Gains power as tension rises."
+        },
+        {
+          "title": "Rogue — The Laughing Archer",
+          "icon": "🏹",
+          "text": "A trickster who thrives in chaos. Uses humor, precision shots, and provocation to disrupt both the field and the Black Baron."
+        },
+        {
+          "title": "Rogue Abilities",
+          "icon": "😏",
+          "text": "Rogue can shoot blocks, pierce lines, interrupt enemy spells, and taunt the Black Baron into making mistakes."
+        }
+      ]
+    },
+
+    {
+      "id": "pets",
+      "icon": "🐾",
+      "title": "Pets",
+      "sections": [
+        {
+          "title": "Pet System",
+          "icon": "🐾",
+          "text": "Pets are passive companions inspired by JRPG systems. They assist automatically and never replace player skill."
+        },
+        {
+          "title": "Cat",
+          "icon": "🐱",
+          "text": "Focus: Intelligence. Anticipates risky placements and reduces pressure from potential mistakes."
+        },
+        {
+          "title": "Dog",
+          "icon": "🐶",
+          "text": "Focus: Defense. Stabilizes pressure spikes and reduces punishment from errors."
+        },
+        {
+          "title": "Fox",
+          "icon": "🦊",
+          "text": "Focus: Speed. Reduces cooldowns and improves reaction windows at high difficulty."
+        },
+        {
+          "title": "Bear",
+          "icon": "🐻",
+          "text": "Focus: Strength. Amplifies positive actions such as combos and line clears."
+        }
+      ]
+    },
+
+    {
+      "id": "antagonist",
+      "icon": "😈",
+      "title": "The Black Baron",
+      "sections": [
+        {
+          "title": "Who Is the Black Baron?",
+          "icon": "👁",
+          "text": "The Black Baron is a reactive antagonist who reflects player performance rather than creating difficulty."
+        },
+        {
+          "title": "Anger System",
+          "icon": "😡",
+          "text": "The Baron possesses an Anger meter. As Anger rises, he loses composure and begins to make mistakes."
+        },
+        {
+          "title": "Loss of Control",
+          "icon": "💥",
+          "text": "At high Anger levels, the Baron's interventions may misfire, occasionally helping the player instead of hindering them."
+        }
+      ]
+    },
+
+    {
+      "id": "taunt",
+      "icon": "😏",
+      "title": "Taunt & Provocation",
+      "sections": [
+        {
+          "title": "What Is Taunt?",
+          "icon": "💬",
+          "text": "Taunt is a psychological mechanic inspired by RPGs. It provokes the Black Baron, increasing his Anger."
+        },
+        {
+          "title": "Mocking Shot",
+          "icon": "🏹",
+          "text": "Rogue's taunt ability fires a mocking shot that disrupts the Baron's concentration."
+        },
+        {
+          "title": "Risk and Reward",
+          "icon": "⚖️",
+          "text": "Taunting is risky. It creates windows of opportunity but can backfire if misused."
+        }
+      ]
+    }
+  ]
+}

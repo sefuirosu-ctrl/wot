@@ -1,0 +1,178 @@
+/* =========================
+   ENCYCLOPEDIA OVERLAY
+========================= */
+#encyclopediaScreen {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 7, 12, 0.95);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =========================
+   ENCYCLOPEDIA PANEL
+========================= */
+.encyclopedia-panel {
+  width: 80%;
+  max-width: 960px;
+  height: 80%;
+  background: #0f1220;
+  border-radius: 10px;
+  border: 1px solid #2a2f45;
+  padding: 16px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================
+   LAYOUT (LEFT MENU + CONTENT)
+========================= */
+.encyclopedia-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 16px;
+  height: 100%;
+}
+
+/* =========================
+   TOPICS LIST (LEFT)
+========================= */
+.encyclopedia-topics {
+  border-right: 1px solid #2a2f45;
+  padding-right: 12px;
+  overflow-y: auto;
+}
+
+.encyclopedia-topic {
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.encyclopedia-topic:hover {
+  background: #1a1f36;
+  opacity: 1;
+}
+
+.encyclopedia-topic.active {
+  background: #2a3155;
+  opacity: 1;
+}
+
+/* =========================
+   CONTENT AREA (RIGHT)
+========================= */
+.encyclopedia-content {
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.encyclopedia-content h3 {
+  margin-top: 0;
+  color: #8aa2ff;
+}
+
+.encyclopedia-section {
+  margin-bottom: 18px;
+}
+
+.encyclopedia-section h4 {
+  margin-bottom: 6px;
+  color: #9aa4d6;
+}
+
+.encyclopedia-section p {
+  margin: 0;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+.encyclopedia-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  color: #e6e6e6;
+  font-size: 22px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.encyclopedia-close:hover {
+  opacity: 1;
+  color: #ff5f5f;
+}
+
+/* =========================
+   DIAGRAMS
+========================= */
+.diagram {
+  margin-top: 10px;
+}
+
+.diagram-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 18px);
+  grid-template-rows: repeat(4, 18px);
+  gap: 2px;
+}
+
+.diagram-cell {
+  width: 18px;
+  height: 18px;
+  background: #1a1f36;
+  border-radius: 2px;
+}
+
+.diagram-cell.block {
+  background: #8aa2ff;
+}
+
+.diagram.interactive {
+  cursor: pointer;
+}
+
+.diagram.interactive:hover {
+  opacity: 0.9;
+}
+
+.diagram.playing .diagram-cell.fade {
+  opacity: 0.3;
+}
+
+.diagram-cell.active {
+  background: #ffcc66;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .encyclopedia-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .encyclopedia-topics {
+    border-right: none;
+    border-bottom: 1px solid #2a2f45;
+    padding-bottom: 8px;
+  }
+}
+
+/* =========================
+   VISIBILITY FIX
+========================= */
+
+/* скрываем энциклопедию по умолчанию */
+#encyclopediaScreen.hidden {
+  display: none !important;
+}
